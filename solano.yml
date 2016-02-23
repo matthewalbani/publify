@@ -1,0 +1,26 @@
+ruby_version: 2.2.2
+hooks:
+  worker_setup: "bundle exec rake db:create db:migrate"
+cache:
+  key_paths: 
+    - "Gemfile" 
+    - "Gemfile.lock"
+profiles:
+  mysql:
+    environment:
+      'DB': 'mysql'
+    mysql:
+      adapter: mysql2
+  sqlite:
+    environment:
+      'DB': 'sqlite'
+    sqlite: true
+  pg:
+    environment:
+      'DB': 'postgresql'
+    postgresql:
+      version: 1.9
+plan:
+  - pg
+  - sqlite
+  - mysql
